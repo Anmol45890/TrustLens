@@ -1,0 +1,14 @@
+numpy
+pandas
+librosa
+opencv-python
+torch
+torchvision
+torchaudio
+transformers
+fastapi
+uvicorn
+scikit-learn
+shap
+mediapipe
+soundfile

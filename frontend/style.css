@@ -1,0 +1,457 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #0a0a0f;
+  --color-surface: #13131a;
+  --color-surface-glass: rgba(19, 19, 26, 0.6);
+  --color-border: rgba(99, 102, 241, 0.2);
+  --color-primary: #6366f1;
+  --color-primary-light: #818cf8;
+  --color-secondary: #22d3ee;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(99, 102, 241, 0.3);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-tagline {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--color-text-muted);
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+#three-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.6;
+}
+
+.scroll-line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-primary), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
+
+/* Section Titles */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 3rem;
+}
+
+/* Analysis Card */
+.analysis-card,
+.upload-card {
+  background: var(--color-surface-glass);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Microphone Button */
+.microphone-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.mic-button {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic-button:hover {
+  transform: scale(1.05);
+  border-color: var(--color-primary);
+}
+
+.mic-button.recording {
+  border-color: var(--color-danger);
+  background: rgba(239, 68, 68, 0.1);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.mic-button.analyzing {
+  border-color: var(--color-secondary);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mic-icon {
+  color: var(--color-text);
+  transition: color 0.3s ease;
+  z-index: 2;
+}
+
+.mic-button.recording .mic-icon {
+  color: var(--color-danger);
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  opacity: 0;
+}
+
+.mic-button.recording .pulse-ring {
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.status-text {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+}
+
+.status-text.recording {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.status-text.analyzing {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+/* Result Container */
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.result-container.hidden {
+  display: none;
+}
+
+.result-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: var(--color-surface);
+}
+
+.progress-ring-circle {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  stroke-dasharray: 565.48;
+  stroke-dashoffset: 565.48;
+  transition: stroke-dashoffset 1s ease, stroke 0.5s ease;
+}
+
+.result-number {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.percent-symbol {
+  font-size: 2rem;
+}
+
+.result-details {
+  text-align: center;
+  max-width: 600px;
+}
+
+.result-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.result-explanation {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* Upload Section */
+.upload-area {
+  border: 2px dashed var(--color-border);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.upload-area:hover {
+  border-color: var(--color-primary);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.upload-area svg {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+}
+
+.file-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.file-info.hidden {
+  display: none;
+}
+
+#file-name {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.analyze-button {
+  padding: 0.875rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-primary);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.analyze-button:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.4);
+}
+
+.analyze-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Disclaimer Section */
+.disclaimer-section {
+  min-height: auto;
+  padding: 2rem;
+}
+
+.disclaimer-card {
+  background: var(--color-surface-glass);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  backdrop-filter: blur(20px);
+}
+
+.disclaimer-card svg {
+  color: var(--color-warning);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.disclaimer-card p {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .analysis-card,
+  .upload-card {
+    padding: 2rem 1rem;
+  }
+
+  .mic-button {
+    width: 120px;
+    height: 120px;
+  }
+
+  .result-visual {
+    transform: scale(0.8);
+  }
+
+  .disclaimer-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Color States */
+.result-container.truth .progress-ring-circle {
+  stroke: var(--color-success);
+}
+
+.result-container.truth .result-label {
+  color: var(--color-success);
+}
+
+.result-container.inconclusive .progress-ring-circle {
+  stroke: var(--color-warning);
+}
+
+.result-container.inconclusive .result-label {
+  color: var(--color-warning);
+}
+
+.result-container.lie .progress-ring-circle {
+  stroke: var(--color-danger);
+}
+
+.result-container.lie .result-label {
+  color: var(--color-danger);
+}

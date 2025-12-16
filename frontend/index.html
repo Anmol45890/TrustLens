@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustLens - AI-Powered Voice Deception Detection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">TrustLens</h1>
+        <p class="hero-tagline">AI-powered Voice Deception Detection</p>
+      </div>
+      <canvas id="three-canvas"></canvas>
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Voice Analysis Section -->
+  <section id="live-analysis" class="section analysis-section">
+    <div class="container">
+      <h2 class="section-title">Live Voice Analysis</h2>
+      <p class="section-subtitle">Speak naturally and let our AI analyze your voice in real-time</p>
+      
+      <div class="analysis-card">
+        <div class="microphone-container">
+          <button id="mic-button" class="mic-button" aria-label="Start recording">
+            <div class="mic-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" x2="12" y1="19" y2="22"/>
+              </svg>
+            </div>
+            <div class="pulse-ring"></div>
+          </button>
+          <p id="status-text" class="status-text">Click to start recording</p>
+        </div>
+
+        <!-- Result Display -->
+        <div id="result-container" class="result-container hidden">
+          <div class="result-visual">
+            <svg class="progress-ring" width="200" height="200">
+              <circle class="progress-ring-bg" cx="100" cy="100" r="90" stroke-width="8"/>
+              <circle id="progress-circle" class="progress-ring-circle" cx="100" cy="100" r="90" stroke-width="8"/>
+            </svg>
+            <div class="result-number">
+              <span id="result-percentage">0</span><span class="percent-symbol">%</span>
+            </div>
+          </div>
+          <div class="result-details">
+            <p id="result-label" class="result-label">Analyzing...</p>
+            <p id="result-explanation" class="result-explanation"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- File Upload Section -->
+  <section id="file-upload" class="section upload-section">
+    <div class="container">
+      <h2 class="section-title">Analyze Audio File</h2>
+      <p class="section-subtitle">Upload a WAV file for analysis</p>
+      
+      <div class="upload-card">
+        <div class="upload-area" id="upload-area">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" x2="12" y1="3" y2="15"/>
+          </svg>
+          <p class="upload-text">Drop your WAV file here or click to browse</p>
+          <input type="file" id="file-input" accept=".wav,audio/wav" hidden>
+        </div>
+        <div id="file-info" class="file-info hidden">
+          <p id="file-name"></p>
+          <button id="analyze-file-button" class="analyze-button">Analyze Audio</button>
+        </div>
+
+        <!-- File Result Display -->
+        <div id="file-result-container" class="result-container hidden">
+          <div class="result-visual">
+            <svg class="progress-ring" width="200" height="200">
+              <circle class="progress-ring-bg" cx="100" cy="100" r="90" stroke-width="8"/>
+              <circle id="file-progress-circle" class="progress-ring-circle" cx="100" cy="100" r="90" stroke-width="8"/>
+            </svg>
+            <div class="result-number">
+              <span id="file-result-percentage">0</span><span class="percent-symbol">%</span>
+            </div>
+          </div>
+          <div class="result-details">
+            <p id="file-result-label" class="result-label">Analyzing...</p>
+            <p id="file-result-explanation" class="result-explanation"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ethics Disclaimer -->
+  <section class="section disclaimer-section">
+    <div class="container">
+      <div class="disclaimer-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" x2="12" y1="8" y2="12"/>
+          <line x1="12" x2="12.01" y1="16" y2="16"/>
+        </svg>
+        <p>This system provides probabilistic analysis and should not be used as definitive proof of deception.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

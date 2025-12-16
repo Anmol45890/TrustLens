@@ -1,0 +1,21 @@
+# Python
+venv/
+path-to-new-venv/
+__pycache__/
+*.pyc
+*.pkl
+*.joblib
+tmp/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
