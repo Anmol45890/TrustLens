@@ -102,17 +102,11 @@ python -m venv venv
 2️⃣ Install backend dependencies
 pip install -r backend/requirements.txt
 
-3️⃣ Add Dataset
+3️⃣ Train the Audio Model
 
-Place .wav files inside:
-
-datasets/audio/truth/
-datasets/audio/lie/
-
-4️⃣ Train the Audio Model
 python audio_model/train_audio_model.py
 
-5️⃣ Start FastAPI Server
+4️⃣ Start FastAPI Server
 python -m uvicorn backend.main:app --reload
 
 
@@ -128,7 +122,7 @@ POST /analyze/audio
 🔹 Step 2: Run Frontend
 1️⃣ Open Terminal 2 (NEW)
 cd frontend
-npm install
+npm ci
 
 2️⃣ Start frontend
 npm run dev

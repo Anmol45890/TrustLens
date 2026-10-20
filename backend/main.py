@@ -1,6 +1,11 @@
+import os
+import shutil
+import tempfile
+from pathlib import Path
+
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, UploadFile, File
-import shutil, os
+
 from audio_model.infer_audio import predict_audio
 
 app = FastAPI(title="TrustLens API")
@@ -13,12 +18,18 @@ app.add_middleware(
 )
 @app.post("/analyze/audio")
 async def analyze_audio(file: UploadFile = File(...)):
-    os.makedirs("tmp", exist_ok=True)
-    temp_path = f"tmp/{file.filename}"
-    with open(temp_path, "wb") as f:
-        shutil.copyfileobj(file.file, f)
+    temp_dir = Path(__file__).resolve().parents[1] / "tmp"
+    temp_dir.mkdir(exist_ok=True)
+    suffix = Path(file.filename or "").suffix
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, dir=temp_dir) as temp_file:
+        temp_path = temp_file.name
+        shutil.copyfileobj(file.file, temp_file)
 
-    score = predict_audio(temp_path)
+    try:
+        score = predict_audio(temp_path)
+    finally:
+        os.unlink(temp_path)
+
     return {
         "deception_probability": round(score * 100, 2),
         "explanation": "Higher pitch variation and pauses increased deception likelihood."
