@@ -206,11 +206,11 @@ Built TrustLens, an AI-powered voice deception detection system using signal pro
 
 👨‍💻 Author
 
-Ashish Sharma
+Anmol Chauhan
 AI / ML Engineer • Full-Stack Developer
 
 🔗 LinkedIn
-👉 https://www.linkedin.com/in/ashish-sharma-30a427291/
+👉https://www.linkedin.com/in/anmol-chauhan-9b718b2b8
 
 💻 GitHub
-👉 https://github.com/ashishsharma909
+👉 https://github.com/Anmol45890
