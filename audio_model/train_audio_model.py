@@ -3,7 +3,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from audio_model.extract_features import extract_features
+from extract_features import extract_features
 
 X = []
 y = []
